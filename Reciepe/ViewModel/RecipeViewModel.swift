@@ -39,8 +39,10 @@ class RecipeViewModel : NSObject {
         
         self.recipeList.value = nil
         apiService.getRecipeList( url:url,parameters: paramters, completion:  { (result, error) in
-            guard let data = result else {return }
-            print(result as Any)
+            guard let data = result else {
+                
+                return self.recipeList.value = nil
+            }
             
             self.recipeList.value = data
         })
@@ -51,7 +53,6 @@ class RecipeViewModel : NSObject {
         
         apiService.getRecipeList(url:"",parameters: [:],nextUrl: url, completion:  { (result, error) in
             guard let data = result else {return }
-            print(result as Any)
             
             var newResult = Result(data: self.recipeList.value!.recipes + data.recipes, url: data.nextUrl)
             //newRecipe.append(data.recipes)

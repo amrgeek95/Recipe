@@ -54,15 +54,11 @@ class RecipeViewController: UIViewController , UITableViewDelegate , UITableView
         recipeViewModel.recipeList.bind{
             [weak self ](list) in
             if let list = list {
-                print(list.nextUrl)
-                print(list.recipes)
                 
                 self?.listTableView.reloadData()
                 if list.recipes.isEmpty {
                     self!.setView(view: self!.notFoundView, hidden: false)
                 }else{
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    self?.listTableView.scrollToRow(at: indexPath, at: .top, animated: true)
                     self!.setView(view: self!.notFoundView, hidden: true)
                 }
             }
@@ -84,14 +80,21 @@ class RecipeViewController: UIViewController , UITableViewDelegate , UITableView
      // Pass the selected object to the new view controller.
      }
      */
-    
-    @IBAction func searchAction(_ sender: Any) {
-        
-        let searchfield = (searchTextField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+    func pushTableToTop(){
+        //first check if there exist data in the list
+        if self.recipeViewModel.recipeList.value?.recipes.count ?? 0 > 0 {
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.listTableView.scrollToRow(at: indexPath, at: .top, animated: true)
 
+        }
+
+    }
+    @IBAction func searchAction(_ sender: Any) {
+        let searchfield = (searchTextField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         searchText = searchfield
         self.recipeViewModel.getreciepeData(filter: selected_filter, search: searchText)
-        
+        // push table to the top after search
+        pushTableToTop()
     }
 }
 
@@ -112,12 +115,14 @@ extension RecipeViewController {
         let item  = filters[indexPath.row]
         let key = item["key"]  ?? ""
         
-        selected_filter = (key == selected_filter ) ?  "": key
-        
-        print(selected_filter)
+    //    selected_filter = (key == selected_filter ) ?  "": key
+        selected_filter = key
         
         
         self.recipeViewModel.getreciepeData(filter: selected_filter, search: searchText)
+        // to push table to the top after refilter the data
+        pushTableToTop()
+
         self.filterCollectionView.reloadData()
     }
     
@@ -160,12 +165,14 @@ extension RecipeViewController {
         
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // check if the user go to last cell to reload the next page .
         if indexPath.row == (recipeViewModel.recipeList.value?.recipes.count ?? 0) - 1 {
             guard let nextUrl = recipeViewModel.recipeList.value?.nextUrl else {return}
             
-            print(nextUrl)
-            
-            recipeViewModel.recipeDataLoadMore(url: nextUrl)
+            if nextUrl != "" {
+                recipeViewModel.recipeDataLoadMore(url: nextUrl)
+            }
+                
         }
     }
     

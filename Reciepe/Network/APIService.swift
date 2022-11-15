@@ -18,25 +18,28 @@ class APIService {
         
         
         let api_url = (nextUrl.isEmpty) ? "\(sourcesURL + url)":nextUrl
-        print(api_url)
-        print(parameters)
+        let falseData = Result(data: [Recipe](), url: "")
         
         AF.request(api_url,method: .get, parameters: parameters).responseJSON {
             (response) in
+            
+            
             if let results = response.value as? [String:Any]{
                 DispatchQueue.main.async {
                     
-                    guard let link = results["_links"] as? [String:AnyObject] else {return}
-                    guard let next = link["next"] as? [String:AnyObject] else {return}
+                    guard let hits = results["hits"] as? [[String:AnyObject]] else {return completion(falseData, nil) }
+                    guard let link = results["_links"] as? [String:AnyObject] else {return completion(falseData, nil) }
+                    guard let next = link["next"] as? [String:AnyObject] else {return completion(falseData, nil) }
                     
-                    guard let hits = results["hits"] as? [[String:AnyObject]] else {return}
-                    print(hits)
                     if let href =  next["href"] as? String {
                         completion(self.recipesListFrom(results: hits,href), nil)
                     }else{
                         completion(self.recipesListFrom(results: hits,""), nil)
                     }
                 }
+            }else{
+                completion(nil, nil)
+
             }
         }
     }
@@ -45,7 +48,6 @@ class APIService {
         
         for recipe in results {
             guard let recipeItem = recipe["recipe"] as? [String:Any] else {return Result(data: recipes, url: "")}
-            print(recipeItem)
             recipes.append(Recipe(data: recipeItem))
         }
         
