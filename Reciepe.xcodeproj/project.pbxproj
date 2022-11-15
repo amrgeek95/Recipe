@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0425E4DA2924241A003FC556 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425E4D92924241A003FC556 /* extensions.swift */; };
 		04FD72FD2921180B0018F0D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD72FC2921180B0018F0D2 /* AppDelegate.swift */; };
 		04FD72FF2921180B0018F0D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD72FE2921180B0018F0D2 /* SceneDelegate.swift */; };
 		04FD73012921180B0018F0D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD73002921180B0018F0D2 /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0425E4D92924241A003FC556 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		04FD72F92921180B0018F0D2 /* Reciepe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciepe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FD72FC2921180B0018F0D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04FD72FE2921180B0018F0D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				04FD734C292275A90018F0D2 /* UIImageViewX.swift */,
 				04FD7350292275BE0018F0D2 /* UIViewX.swift */,
 				04FD734B292275A90018F0D2 /* UITextFieldX.swift */,
+				0425E4D92924241A003FC556 /* extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				04FD73072921180B0018F0D2 /* Reciepe.xcdatamodeld in Sources */,
 				04FD7340292240730018F0D2 /* recipeTableViewCell.swift in Sources */,
 				04FD733A292233DC0018F0D2 /* RecipeViewController.swift in Sources */,
+				0425E4DA2924241A003FC556 /* extensions.swift in Sources */,
 				04FD72FD2921180B0018F0D2 /* AppDelegate.swift in Sources */,
 				04FD734E292275A90018F0D2 /* UITextFieldX.swift in Sources */,
 				04FD7334292232A10018F0D2 /* Recipe.swift in Sources */,

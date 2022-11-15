@@ -71,15 +71,8 @@ class RecipeViewController: UIViewController , UITableViewDelegate , UITableView
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    
     func pushTableToTop(){
         //first check if there exist data in the list
         if self.recipeViewModel.recipeList.value?.recipes.count ?? 0 > 0 {
@@ -87,17 +80,17 @@ class RecipeViewController: UIViewController , UITableViewDelegate , UITableView
             self.listTableView.scrollToRow(at: indexPath, at: .top, animated: true)
 
         }
-
     }
     @IBAction func searchAction(_ sender: Any) {
         let searchfield = (searchTextField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        searchText = searchfield
         guard searchfield != "" else {return}
 
-        searchText = searchfield
         self.recipeViewModel.getreciepeData(filter: selected_filter, search: searchText)
         // push table to the top after search
         pushTableToTop()
     }
+ 
 }
 
 
