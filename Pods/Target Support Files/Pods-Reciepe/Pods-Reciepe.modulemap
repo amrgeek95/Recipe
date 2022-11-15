@@ -1,0 +1,6 @@
+framework module Pods_Reciepe {
+  umbrella header "Pods-Reciepe-umbrella.h"
+
+  export *
+  module * { export * }
+}
