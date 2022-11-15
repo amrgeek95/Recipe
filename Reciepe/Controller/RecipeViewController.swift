@@ -91,6 +91,8 @@ class RecipeViewController: UIViewController , UITableViewDelegate , UITableView
     }
     @IBAction func searchAction(_ sender: Any) {
         let searchfield = (searchTextField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        guard searchfield != "" else {return}
+
         searchText = searchfield
         self.recipeViewModel.getreciepeData(filter: selected_filter, search: searchText)
         // push table to the top after search
